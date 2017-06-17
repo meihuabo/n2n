@@ -509,61 +509,61 @@ static void readFromIPSocket( n2n_edge_t * eee );
 static void readFromMgmtSocket( n2n_edge_t * eee, int * keep_running );
 
 static void help() {
-  print_n2n_version();
+  //print_n2n_version();
 
-  printf("edge "
-#if defined(N2N_CAN_NAME_IFACE)
-	 "-d <tun device> "
-#endif /* #if defined(N2N_CAN_NAME_IFACE) */
-	 "-a [static:|dhcp:]<tun IP address> "
-	 "-c <community> "
-	 "[-k <encrypt key> | -K <key file>] "
-	 "[-s <netmask>] "
-#if defined(N2N_HAVE_SETUID)
-	 "[-u <uid> -g <gid>]"
-#endif /* #ifndef N2N_HAVE_SETUID */
+//    printf("edge "
+//#if defined(N2N_CAN_NAME_IFACE)
+//	 "-d <tun device> "
+//#endif /* #if defined(N2N_CAN_NAME_IFACE) */
+//	 "-a [static:|dhcp:]<tun IP address> "
+//	 "-c <community> "
+//	 "[-k <encrypt key> | -K <key file>] "
+//	 "[-s <netmask>] "
+//#if defined(N2N_HAVE_SETUID)
+//	 "[-u <uid> -g <gid>]"
+//#endif /* #ifndef N2N_HAVE_SETUID */
 
-#if defined(N2N_HAVE_DAEMON)
-	 "[-f]"
-#endif /* #if defined(N2N_HAVE_DAEMON) */
-	 "[-m <MAC address>]"
-	 "\n"
-	 "-l <supernode host:port> "
-	 "[-p <local port>] [-M <mtu>] "
-	 "[-r] [-E] [-v] [-t <mgmt port>] [-b] [-h]\n\n");
+//#if defined(N2N_HAVE_DAEMON)
+//	 "[-f]"
+//#endif /* #if defined(N2N_HAVE_DAEMON) */
+//	 "[-m <MAC address>]"
+//	 "\n"
+//	 "-l <supernode host:port> "
+//	 "[-p <local port>] [-M <mtu>] "
+//	 "[-r] [-E] [-v] [-t <mgmt port>] [-b] [-h]\n\n");
 
-#ifdef __linux__
-  printf("-d <tun device>          | tun device name\n");
-#endif
+//#ifdef __linux__
+ // printf("-d <tun device>          | tun device name\n");
+//#endif
 
-  printf("-a <mode:address>        | Set interface address. For DHCP use '-r -a dhcp:0.0.0.0'\n");
-  printf("-c <community>           | n2n community name the edge belongs to.\n");
-  printf("-k <encrypt key>         | Encryption key (ASCII) - also N2N_KEY=<encrypt key>. Not with -K.\n");
-  printf("-K <key file>            | Specify a key schedule file to load. Not with -k.\n");
-  printf("-s <netmask>             | Edge interface netmask in dotted decimal notation (255.255.255.0).\n");
-  printf("-l <supernode host:port> | Supernode IP:port\n");
-  printf("-L <local_ip>            | Add local ip to bypass between same nat problem\n");
-  printf("-i <interval>            | Set the NAT hole-punch interval (default 20seconds)\n");
-  printf("-b                       | Periodically resolve supernode IP\n");
-  printf("                         : (when supernodes are running on dynamic IPs)\n");
-  printf("-p <local port>          | Fixed local UDP port.\n");
-#ifndef WIN32
-  printf("-u <UID>                 | User ID (numeric) to use when privileges are dropped.\n");
-  printf("-g <GID>                 | Group ID (numeric) to use when privileges are dropped.\n");
-#endif /* ifndef WIN32 */
-#ifdef N2N_HAVE_DAEMON
-  printf("-f                       | Do not fork and run as a daemon; rather run in foreground.\n");
-#endif /* #ifdef N2N_HAVE_DAEMON */
-  printf("-m <MAC address>         | Fix MAC address for the TAP interface (otherwise it may be random)\n"
-         "                         : eg. -m 01:02:03:04:05:06\n");
-  printf("-M <mtu>                 | Specify n2n MTU of edge interface (default %d).\n", DEFAULT_MTU);
-  printf("-r                       | Enable packet forwarding through n2n community.\n");
-  printf("-E                       | Accept multicast MAC addresses (default=drop).\n");
-  printf("-v                       | Make more verbose. Repeat as required.\n");
-  printf("-t                       | Management UDP Port (for multiple edges on a machine).\n");
+//  printf("-a <mode:address>        | Set interface address. For DHCP use '-r -a dhcp:0.0.0.0'\n");
+//  printf("-c <community>           | n2n community name the edge belongs to.\n");
+//  printf("-k <encrypt key>         | Encryption key (ASCII) - also N2N_KEY=<encrypt key>. Not with -K.\n");
+//  printf("-K <key file>            | Specify a key schedule file to load. Not with -k.\n");
+//  printf("-s <netmask>             | Edge interface netmask in dotted decimal notation (255.255.255.0).\n");
+//  printf("-l <supernode host:port> | Supernode IP:port\n");
+//  printf("-L <local_ip>            | Add local ip to bypass between same nat problem\n");
+//  printf("-i <interval>            | Set the NAT hole-punch interval (default 20seconds)\n");
+//  printf("-b                       | Periodically resolve supernode IP\n");
+//  printf("                         : (when supernodes are running on dynamic IPs)\n");
+//  printf("-p <local port>          | Fixed local UDP port.\n");
+//#ifndef WIN32
+//  printf("-u <UID>                 | User ID (numeric) to use when privileges are dropped.\n");
+//  printf("-g <GID>                 | Group ID (numeric) to use when privileges are dropped.\n");
+//#endif /* ifndef WIN32 */
+//#ifdef N2N_HAVE_DAEMON
+//  printf("-f                       | Do not fork and run as a daemon; rather run in foreground.\n");
+//#endif /* #ifdef N2N_HAVE_DAEMON */
+//  printf("-m <MAC address>         | Fix MAC address for the TAP interface (otherwise it may be random)\n"
+//         "                         : eg. -m 01:02:03:04:05:06\n");
+//  printf("-M <mtu>                 | Specify n2n MTU of edge interface (default %d).\n", DEFAULT_MTU);
+//  printf("-r                       | Enable packet forwarding through n2n community.\n");
+//  printf("-E                       | Accept multicast MAC addresses (default=drop).\n");
+//  printf("-v                       | Make more verbose. Repeat as required.\n");
+//  printf("-t                       | Management UDP Port (for multiple edges on a machine).\n");
 
-  printf("\nEnvironment variables:\n");
-  printf("  N2N_KEY                | Encryption key (ASCII). Not with -K or -k.\n" );
+//  printf("\nEnvironment variables:\n");
+ // printf("  N2N_KEY                | Encryption key (ASCII). Not with -K or -k.\n" );
 
   exit(0);
 }
@@ -2377,7 +2377,7 @@ int real_main(int argc, char* argv[])
     /* unfortunately, any cmdline quoting used originally is gone, so we can
      * not use the getopt to process the install
      */
-    if (!strncasecmp(effectiveargv[1],"--install",9)) {
+    if (!strncmp(effectiveargv[1],"--install",9)) {
         char *p = strchr(linebuffer,' ') +1; /* skip the argv[0] */
         char *scm_args = strchr(p,' ') +1; /* skip the "--install" */
 
